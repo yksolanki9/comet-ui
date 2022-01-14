@@ -1,0 +1,7 @@
+{
+  "name": "comet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
