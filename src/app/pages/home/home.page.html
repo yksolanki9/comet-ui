@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My diary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home__content">
+    <ng-container *ngFor="let note of notes">
+      <app-note-card [note]="note"></app-note-card>
+    </ng-container>
+  </div>
+</ion-content>
