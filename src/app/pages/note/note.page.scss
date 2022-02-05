@@ -1,0 +1,40 @@
+.note {
+  &__content {
+    padding: 24px 16px;
+  }
+
+  &__date {
+    font-size: 24px;
+
+    &--sm {
+      font-size: 16px;
+      color: #404040;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    padding-top: 12px;
+    color: #404040;
+
+    &:empty:before {
+      content: 'Title';
+      color: gray;
+    }
+  }
+
+  &__body {
+    font-size: 16px;
+    padding-top: 12px;
+    color: #737373;
+
+    &:empty:before {
+      content: 'Write more here...';
+      color: gray;
+    }
+  }
+
+  &__fab {
+    margin: 8px 16px 24px 8px;
+  }
+}

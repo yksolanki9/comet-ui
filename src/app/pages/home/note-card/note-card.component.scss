@@ -2,4 +2,11 @@
   &__title {
     color: #404040;
   }
+
+  &__date {
+    &--sm {
+      font-size: 16px;
+      color: #404040;
+    }
+  }
 }

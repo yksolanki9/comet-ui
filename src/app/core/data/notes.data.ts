@@ -1,34 +1,41 @@
+/* eslint-disable max-len */
 import { Note } from '../models/note.model';
 
 export const notes: Partial<Note>[] = [
   {
+    id: 0,
     title: 'My first title',
     content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Feb 05 2021 16:32:46 GMT+0530 (India Standard Time)',
   },
   {
+    id: 1,
     title: 'My first title',
     content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Feb 25 2022 16:32:46 GMT+0530 (India Standard Time)',
   },
   {
+    id: 2,
     title: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
     content: 'My first content',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Feb 15 2022 16:32:46 GMT+0530 (India Standard Time)',
   },
   {
+    id: 3,
     title: 'My first title',
     content: 'My first content',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Oct 05 2022 16:32:46 GMT+0530 (India Standard Time)',
   },
   {
+    id: 4,
     title: 'My first title',
     content: 'My first content',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Sep 05 2022 16:32:46 GMT+0530 (India Standard Time)',
   },
   {
+    id: 5,
     title: 'My first title',
     content: 'My first content',
-    createdAt: '6 Jan',
+    createdAt: 'Sat Jan 05 2022 16:32:46 GMT+0530 (India Standard Time)',
   }
 ];

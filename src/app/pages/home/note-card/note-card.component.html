@@ -1,6 +1,9 @@
-<ion-card button routerLink="/note">
+<ion-card (click)="expandNote()" button>
   <ion-card-header>
-    <ion-card-title> {{ note.createdAt }} </ion-card-title>
+    <ion-card-title> 
+      <span> {{ note.createdAt | date: 'd' }} </span> 
+      <span class="note-card__date--sm"> {{ note.createdAt | date: 'MMM y' }} </span> 
+      </ion-card-title>
     <ion-card-subtitle class="text-ellipsis note-card__title"> {{ note.title }} </ion-card-subtitle>
     <ion-card-subtitle class="text-ellipsis">  {{ note.content }} </ion-card-subtitle>
   </ion-card-header>

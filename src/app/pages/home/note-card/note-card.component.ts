@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Note } from 'src/app/core/models/note.model';
 
 @Component({
@@ -9,8 +9,13 @@ import { Note } from 'src/app/core/models/note.model';
 export class NoteCardComponent implements OnInit {
   @Input() note: Note;
 
+  @Output() openNote = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit() {}
 
+  expandNote() {
+    this.openNote.emit();
+  }
 }
