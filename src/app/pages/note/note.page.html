@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content [ngClass]="{'bg-white': isEditMode}">
-  <div class="note__content">
-    <div class="note__date input-div" id="date"> 
+  <form [formGroup]="noteForm" class="note__content">
+    <div formControlName="createdAt" class="note__date input-div" id="date"> 
       <span> 
         {{  note.createdAt | date: 'd' }}
       </span>
@@ -22,9 +22,9 @@
         <ion-datetime presentation="date" (ionChange)="dateSelected($event)" [max]="maxDate"></ion-datetime>
       </ng-template>
     </ion-popover>
-    <div class="note__title input-div" [contentEditable]="isEditMode"> {{ note.title }} </div>
-    <div #noteContent class="note__body input-div" [contentEditable]="isEditMode"> {{ note.content }} </div>
-  </div>
+    <div formControlName="title" class="note__title input-div" [contentEditable]="isEditMode"> {{ note.title }} </div>
+    <div formControlName="content" #noteContent class="note__body input-div" [contentEditable]="isEditMode"> {{ note.content }} </div>
+  </form>
   <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="switchMode()">
       <ion-icon *ngIf="!isEditMode && !isNewNote" name="pencil"></ion-icon>

@@ -33,10 +33,19 @@ ion-content {
   --background: white;
 }
 
+.bg-grey {
+  background: #fafafa;
+}
+
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+input,textarea {
+  border: 0;
+  width: 100%;
 }
 
 .input-div {

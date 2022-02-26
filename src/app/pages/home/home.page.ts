@@ -24,6 +24,6 @@ export class HomePage implements OnInit {
   }
 
   createNote() {
-    this.router.navigate(['/', 'note', { mode: 'add'}]);
+    this.router.navigate(['/', 'note','99', { mode: 'add'}]);
   }
 }
