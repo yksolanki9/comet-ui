@@ -1,0 +1,13 @@
+<div class="date input-div" id="date"> 
+  <span> 
+    {{  value | date: 'd' }}
+  </span>
+  <span  class="date--sm">
+    {{  value | date: 'MMM y' }}
+  </span>
+</div>
+<ion-popover *ngIf="isEditMode" trigger="date" size="cover">
+  <ng-template>
+    <ion-datetime presentation="date" (ionChange)="dateSelected($event)" [max]="maxDate"></ion-datetime>
+  </ng-template>
+</ion-popover>

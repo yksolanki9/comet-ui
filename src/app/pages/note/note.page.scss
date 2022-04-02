@@ -3,18 +3,8 @@
     padding: 24px 16px;
   }
 
-  &__date {
-    font-size: 24px;
-
-    &--sm {
-      font-size: 16px;
-      color: #404040;
-    }
-  }
-
   &__title {
     font-size: 20px;
-    padding-top: 12px;
     color: #404040;
 
     &:empty:before {
@@ -25,7 +15,6 @@
 
   &__body {
     font-size: 16px;
-    padding-top: 12px;
     color: #737373;
 
     &:empty:before {

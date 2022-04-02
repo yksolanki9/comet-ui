@@ -9,21 +9,9 @@
 
 <ion-content [ngClass]="{'bg-white': isEditMode}">
   <form [formGroup]="noteForm" class="note__content">
-    <div formControlName="createdAt" class="note__date input-div" id="date"> 
-      <span> 
-        {{  note.createdAt | date: 'd' }}
-      </span>
-      <span  class="note__date--sm">
-        {{  note.createdAt | date: 'MMM y' }}
-      </span>
-    </div>
-    <ion-popover *ngIf="isEditMode" trigger="date" size="cover">
-      <ng-template>
-        <ion-datetime presentation="date" (ionChange)="dateSelected($event)" [max]="maxDate"></ion-datetime>
-      </ng-template>
-    </ion-popover>
-    <div formControlName="title" class="note__title input-div" [contentEditable]="isEditMode"> {{ note.title }} </div>
-    <div formControlName="content" #noteContent class="note__body input-div" [contentEditable]="isEditMode"> {{ note.content }} </div>
+    <app-date-input formControlName="createdAt" class="note__date input-div" [value]="" [isEditMode]="isEditMode"></app-date-input>
+    <ion-textarea #noteTitle autoGrow="true" class="note__title input-div" placeholder="Title" formControlName="title" [readonly]="!isEditMode"></ion-textarea>
+    <ion-textarea autoGrow="true" #noteContent class="note__body input-div" placeholder="Write more here..." formControlName="content" [readonly]="!isEditMode"></ion-textarea>
   </form>
   <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="switchMode()">
@@ -32,3 +20,4 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+

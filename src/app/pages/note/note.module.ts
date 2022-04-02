@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NotePageRoutingModule } from './note-routing.module';
 
 import { NotePage } from './note.page';
+import { DateInputComponent } from './date-input/date-input.component';
 
 @NgModule({
   imports: [
@@ -14,8 +15,8 @@ import { NotePage } from './note.page';
     FormsModule,
     IonicModule,
     NotePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [NotePage]
+  declarations: [NotePage, DateInputComponent]
 })
 export class NotePageModule {}
