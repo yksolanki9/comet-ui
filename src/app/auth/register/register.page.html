@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="h-max register">
+    <img class="register__logo" src="../../../assets/images/comet-logo.png" alt="comet-logo">
+    <div class="w-max register__form">
+      <ion-grid>
+        <ion-row class="register__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="register__form__icon" name="person-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="register__form__input" placeholder="First Name" name="firstName"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row class="register__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="register__form__icon" name="person-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="register__form__input" placeholder="Last Name" name="lastName"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row class="register__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="register__form__icon" name="mail-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="register__form__input" inputmode="email" type="email" placeholder="Email" name="email"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row class="register__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="register__form__icon" name="lock-closed-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="register__form__input" type="password" placeholder="Password" name="password" required></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="register__form__cta" color="dark" expand="block" size="large"> REGISTER </ion-button>
+    </div>
+    <ion-text class="register__bottom-text"> Already have an account? <a class="register__bottom-text--link" href="#">Log in here</a></ion-text>
+  </div>
+</ion-content>

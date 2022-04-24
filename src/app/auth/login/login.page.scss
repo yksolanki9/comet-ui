@@ -1,0 +1,46 @@
+$logo-color: #46CDCF;
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__logo {
+    width: 70%;
+    margin-top: 40%;
+  }
+
+  &__form {
+    margin-top: 36px;
+
+    &__input-container {
+      border-bottom: 1px solid $logo-color;
+      margin-top: 18px;
+    }
+
+    &__icon {
+      font-size: 24px;
+      margin-top: 8px;
+      opacity: 0.5;
+    }
+
+    &__input {
+      --padding-bottom: 16px;
+    }
+
+    &__cta {
+      margin-top: 24px;
+      font-size: 18px;
+    }
+  }
+
+  &__bottom-text {
+    position: absolute;
+    bottom: 36px;
+
+    &--link {
+      color: $logo-color;
+      text-decoration: none;
+    }
+  }
+}

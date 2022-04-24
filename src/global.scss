@@ -27,6 +27,10 @@
 
 ion-content {
   --background: #fafafa;
+  --padding-top: 24px;
+  --padding-end: 16px;
+  --padding-bottom: 24px;
+  --padding-start: 16px;
 }
 
 .bg-white {
@@ -35,6 +39,14 @@ ion-content {
 
 .bg-grey {
   background: #fafafa;
+}
+
+.h-max {
+  height: 100% !important;
+}
+
+.w-max {
+  width: 100% !important;
 }
 
 .text-ellipsis {
@@ -54,4 +66,8 @@ input,textarea {
 
 textarea {
   padding: 0 !important;
+}
+
+.d-flex {
+  display: flex;
 }

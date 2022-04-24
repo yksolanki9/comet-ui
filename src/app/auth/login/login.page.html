@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="h-max login">
+    <img class="login__logo" src="../../../assets/images/comet-logo.png" alt="comet-logo">
+    <div class="w-max login__form">
+      <ion-grid>
+        <ion-row class="login__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="login__form__icon" name="mail-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="login__form__input" inputmode="email" type="email" placeholder="Email" name="email" required></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row class="login__form__input-container">
+          <ion-col size="12px">
+            <ion-icon class="login__form__icon" name="lock-closed-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input class="login__form__input" type="password" placeholder="Password" name="password" required></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="login__form__cta" color="dark" expand="block" size="large"> LOGIN </ion-button>
+    </div>
+    <ion-text class="login__bottom-text"> Don't have an account? <a class="login__bottom-text--link" href="#">Sign up here</a></ion-text>
+  </div>
+</ion-content>
