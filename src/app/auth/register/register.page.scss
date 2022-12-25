@@ -18,6 +18,17 @@ $logo-color: #46cdcf;
     &__input-container {
       border-bottom: 1px solid $logo-color;
       margin-top: 18px;
+
+      &--error {
+        border-bottom: 1px solid red;
+      }
+    }
+
+    &__error-msg {
+      color: red;
+      position: absolute;
+      padding-top: 2px;
+      padding-left: 4px;
     }
 
     &__icon {

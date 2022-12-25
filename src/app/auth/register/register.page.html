@@ -45,7 +45,10 @@
         </ion-row>
       </ion-grid>
       <ion-grid>
-        <ion-row class="register__form__input-container">
+        <ion-row
+          class="register__form__input-container"
+          [ngClass]="{'register__form__input-container--error': fg.controls.email.touched && !fg.controls.email.valid}"
+        >
           <ion-col size="12px">
             <ion-icon
               class="register__form__icon"
@@ -62,12 +65,18 @@
             ></ion-input>
           </ion-col>
         </ion-row>
-        <div *ngIf="fg.controls.email.touched && !fg.controls.email.valid">
+        <div
+          *ngIf="fg.controls.email.touched && !fg.controls.email.valid"
+          class="register__form__error-msg"
+        >
           Please enter a valid email
         </div>
       </ion-grid>
       <ion-grid>
-        <ion-row class="register__form__input-container">
+        <ion-row
+          class="register__form__input-container"
+          [ngClass]="{'register__form__input-container--error': fg.controls.password.touched && !fg.controls.password.valid}"
+        >
           <ion-col size="12px">
             <ion-icon
               class="register__form__icon"
@@ -92,6 +101,7 @@
         </ion-row>
         <div
           *ngIf="fg.controls.password.touched && !fg.controls.password.valid"
+          class="register__form__error-msg"
         >
           Password is too short
         </div>

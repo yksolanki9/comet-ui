@@ -7,7 +7,10 @@
     />
     <div class="w-max login__form">
       <ion-grid>
-        <ion-row class="login__form__input-container">
+        <ion-row
+          class="login__form__input-container"
+          [ngClass]="{'login__form__input-container--error': fg.controls.email.touched && !fg.controls.email.valid}"
+        >
           <ion-col size="12px">
             <ion-icon class="login__form__icon" name="mail-outline"></ion-icon>
           </ion-col>
@@ -22,7 +25,10 @@
             ></ion-input>
           </ion-col>
         </ion-row>
-        <div *ngIf="fg.controls.email.touched && !fg.controls.email.valid">
+        <div
+          *ngIf="fg.controls.email.touched && !fg.controls.email.valid"
+          class="login__form__error-msg"
+        >
           Please enter a valid email
         </div>
       </ion-grid>
