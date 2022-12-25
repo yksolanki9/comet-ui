@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,25 +11,29 @@ import { Router } from '@angular/router';
 export class RegisterPage implements OnInit {
   fg: FormGroup;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.fg = new FormGroup({
       firstName: new FormControl(null, [Validators.required]),
       lastName: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8)])
-    })
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
   }
 
   ionViewWillEnter() {}
 
-  onSubmit(val) {
-    this.http.post(`${environment.ROOT_URL}/register`, val).subscribe(() => {
+  onSubmit(data) {
+    this.authService.register(data).subscribe(() => {
       this.router.navigate(['/home']);
-    })
+    });
   }
 }
