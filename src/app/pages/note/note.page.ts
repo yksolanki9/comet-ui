@@ -4,6 +4,7 @@ import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'app-note',
@@ -13,9 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class NotePage implements OnInit {
   noteForm: FormGroup;
 
-  isEditMode = false;
-
-  isNewNote = false;
+  mode: 'ADD' | 'EDIT' | 'VIEW' = 'VIEW';
 
   noteId: string;
 
@@ -27,12 +26,8 @@ export class NotePage implements OnInit {
   ngOnInit() {
     this.noteId = this.activatedRoute.snapshot.params.id;
 
-    // For now, I'm assuming that I'll assign noteId to new expense directly. This will help in autosaving as well
-    // Need to figure out the cons (if any)
-    this.isNewNote = this.activatedRoute.snapshot.params.mode === 'add';
-
-    if (this.isNewNote) {
-      this.isEditMode = true;
+    if (this.activatedRoute.snapshot.params.mode === 'add') {
+      this.mode = 'ADD';
     }
 
     this.noteForm = new FormGroup({
@@ -41,7 +36,7 @@ export class NotePage implements OnInit {
       content: new FormControl(),
     });
 
-    if (this.noteId && !this.isNewNote) {
+    if (this.noteId) {
       this.http
         .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
         .subscribe((note) => {
@@ -57,14 +52,21 @@ export class NotePage implements OnInit {
   }
 
   onFabClicked() {
-    if (this.isEditMode) {
+    if (this.mode === 'ADD') {
+      this.http
+        .post(`${environment.ROOT_URL}/api/v1/note`, this.noteForm.value)
+        .subscribe(noop);
+      this.mode = 'VIEW';
+    } else if (this.mode === 'EDIT') {
       this.http
         .patch(
           `${environment.ROOT_URL}/api/v1/note/${this.noteId}`,
           this.noteForm.value
         )
-        .subscribe(() => {});
+        .subscribe(noop);
+      this.mode = 'VIEW';
+    } else {
+      this.mode = 'EDIT';
     }
-    this.isEditMode = !this.isEditMode;
   }
 }

@@ -6,7 +6,7 @@ import { NotePage } from './note.page';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: NotePage,
   },
 ];

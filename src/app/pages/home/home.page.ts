@@ -28,10 +28,10 @@ export class HomePage implements OnInit {
   }
 
   openNote(noteId: string) {
-    this.router.navigate(['/', 'note', noteId]);
+    this.router.navigate(['/', 'note', { id: noteId }]);
   }
 
   createNote() {
-    this.router.navigate(['/', 'note', '99', { mode: 'add' }]);
+    this.router.navigate(['/', 'note', { mode: 'add' }]);
   }
 }

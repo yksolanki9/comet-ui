@@ -7,32 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngClass]="{'bg-white': isEditMode}">
+<ion-content [ngClass]="{'bg-white': mode !== 'VIEW'}">
   <form [formGroup]="noteForm" class="note__content">
     <app-date-input
       formControlName="createdAt"
       class="note__date input-div"
-      [isEditMode]="isEditMode"
+      [isEditMode]="mode !== 'VIEW'"
     ></app-date-input>
     <ion-textarea
       autoGrow="true"
       class="note__title input-div"
       placeholder="Title"
       formControlName="title"
-      [readonly]="!isEditMode"
+      [readonly]="mode === 'VIEW'"
     ></ion-textarea>
     <ion-textarea
       autoGrow="true"
       class="note__body input-div"
       placeholder="Write more here..."
       formControlName="content"
-      [readonly]="!isEditMode"
+      [readonly]="mode === 'VIEW'"
     ></ion-textarea>
   </form>
   <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="onFabClicked()">
-      <ion-icon *ngIf="!isEditMode && !isNewNote" name="pencil"></ion-icon>
-      <ion-icon *ngIf="isEditMode || isNewNote" name="save"></ion-icon>
+      <ion-icon *ngIf="mode === 'VIEW'" name="pencil"></ion-icon>
+      <ion-icon *ngIf="mode !== 'VIEW'" name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
