@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "comet",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
