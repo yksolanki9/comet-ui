@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable()
 export class HttpReqInterceptor implements HttpInterceptor {
@@ -15,7 +15,7 @@ export class HttpReqInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return from(Storage.get({ key: 'ACCESS_TOKEN' })).pipe(
+    return from(Preferences.get({ key: 'ACCESS_TOKEN' })).pipe(
       switchMap((accessToken) => {
         const modifiedRequest = req.clone({
           headers: req.headers.append('x-access-token', accessToken.value),

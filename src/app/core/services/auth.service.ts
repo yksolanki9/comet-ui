@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AuthService {
           message: string;
           userId: string;
         }) =>
-          await Storage.set({
+          await Preferences.set({
             key: 'ACCESS_TOKEN',
             value: loginResponse.access_token,
           })
@@ -41,7 +41,7 @@ export class AuthService {
           message: string;
           userId: string;
         }) =>
-          await Storage.set({
+          await Preferences.set({
             key: 'ACCESS_TOKEN',
             value: loginResponse.access_token,
           })

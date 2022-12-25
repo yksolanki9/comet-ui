@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return Storage.get({ key: 'ACCESS_TOKEN' }).then((accessToken) => {
+    return Preferences.get({ key: 'ACCESS_TOKEN' }).then((accessToken) => {
       if (!accessToken?.value) {
         return this.router.createUrlTree(['/login']);
       }
