@@ -17,13 +17,15 @@ export class NotePage implements OnInit {
 
   isNewNote = false;
 
+  noteId: string;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient
   ) {}
 
   ngOnInit() {
-    const noteId = this.activatedRoute.snapshot.params.id;
+    this.noteId = this.activatedRoute.snapshot.params.id;
 
     // For now, I'm assuming that I'll assign noteId to new expense directly. This will help in autosaving as well
     // Need to figure out the cons (if any)
@@ -39,9 +41,9 @@ export class NotePage implements OnInit {
       content: new FormControl(),
     });
 
-    if (noteId && !this.isNewNote) {
+    if (this.noteId && !this.isNewNote) {
       this.http
-        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${noteId}`)
+        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
         .subscribe((note) => {
           this.noteForm.patchValue({
             createdAt: note.createdAt
@@ -54,7 +56,15 @@ export class NotePage implements OnInit {
     }
   }
 
-  switchMode() {
+  onFabClicked() {
+    if (this.isEditMode) {
+      this.http
+        .patch(
+          `${environment.ROOT_URL}/api/v1/note/${this.noteId}`,
+          this.noteForm.value
+        )
+        .subscribe(() => {});
+    }
     this.isEditMode = !this.isEditMode;
   }
 }

@@ -30,7 +30,7 @@
     ></ion-textarea>
   </form>
   <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="switchMode()">
+    <ion-fab-button (click)="onFabClicked()">
       <ion-icon *ngIf="!isEditMode && !isNewNote" name="pencil"></ion-icon>
       <ion-icon *ngIf="isEditMode || isNewNote" name="save"></ion-icon>
     </ion-fab-button>
