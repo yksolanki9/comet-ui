@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class RegisterPage implements OnInit {
   fg: FormGroup;
 
+  isPasswordShown = false;
+
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {

@@ -37,11 +37,17 @@
           <ion-col>
             <ion-input
               class="login__form__input"
-              type="password"
+              [type]="isPasswordShown ? 'text' : 'password'"
               placeholder="Password"
               formControlName="password"
               required
             ></ion-input>
+          </ion-col>
+          <ion-col size="12px" (click)="isPasswordShown = !isPasswordShown">
+            <ion-icon
+              [name]="isPasswordShown ? 'eye-off': 'eye'"
+              class="login__form__icon--eye"
+            ></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>

@@ -1,51 +1,117 @@
 <ion-content>
   <div class="h-max register">
-    <img class="register__logo" src="../../../assets/images/comet-logo.png" alt="comet-logo">
-    <form [formGroup]="fg" (ngSubmit)="onSubmit(fg.value)" class="w-max register__form">
+    <img
+      class="register__logo"
+      src="../../../assets/images/comet-logo.png"
+      alt="comet-logo"
+    />
+    <form
+      [formGroup]="fg"
+      (ngSubmit)="onSubmit(fg.value)"
+      class="w-max register__form"
+    >
       <ion-grid>
         <ion-row class="register__form__input-container">
           <ion-col size="12px">
-            <ion-icon class="register__form__icon" name="person-outline"></ion-icon>
+            <ion-icon
+              class="register__form__icon"
+              name="person-outline"
+            ></ion-icon>
           </ion-col>
           <ion-col>
-            <ion-input class="register__form__input" placeholder="First Name" formControlName="firstName"></ion-input>
+            <ion-input
+              class="register__form__input"
+              placeholder="First Name"
+              formControlName="firstName"
+            ></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row class="register__form__input-container">
           <ion-col size="12px">
-            <ion-icon class="register__form__icon" name="person-outline"></ion-icon>
+            <ion-icon
+              class="register__form__icon"
+              name="person-outline"
+            ></ion-icon>
           </ion-col>
           <ion-col>
-            <ion-input class="register__form__input" placeholder="Last Name" formControlName="lastName"></ion-input>
+            <ion-input
+              class="register__form__input"
+              placeholder="Last Name"
+              formControlName="lastName"
+            ></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row class="register__form__input-container">
           <ion-col size="12px">
-            <ion-icon class="register__form__icon" name="mail-outline"></ion-icon>
+            <ion-icon
+              class="register__form__icon"
+              name="mail-outline"
+            ></ion-icon>
           </ion-col>
           <ion-col>
-            <ion-input class="register__form__input" inputmode="email" type="email" placeholder="Email" formControlName="email"></ion-input>
+            <ion-input
+              class="register__form__input"
+              inputmode="email"
+              type="email"
+              placeholder="Email"
+              formControlName="email"
+            ></ion-input>
           </ion-col>
         </ion-row>
-        <div *ngIf="fg.controls.email.touched && !fg.controls.email.valid">Please enter a valid email</div>
+        <div *ngIf="fg.controls.email.touched && !fg.controls.email.valid">
+          Please enter a valid email
+        </div>
       </ion-grid>
       <ion-grid>
         <ion-row class="register__form__input-container">
           <ion-col size="12px">
-            <ion-icon class="register__form__icon" name="lock-closed-outline"></ion-icon>
+            <ion-icon
+              class="register__form__icon"
+              name="lock-closed-outline"
+            ></ion-icon>
           </ion-col>
           <ion-col>
-            <ion-input class="register__form__input" type="password" placeholder="Password" formControlName="password" required></ion-input>
+            <ion-input
+              class="register__form__input"
+              [type]="isPasswordShown ? 'text' : 'password'"
+              placeholder="Password"
+              formControlName="password"
+              required
+            ></ion-input>
+          </ion-col>
+          <ion-col size="12px" (click)="isPasswordShown = !isPasswordShown">
+            <ion-icon
+              [name]="isPasswordShown ? 'eye-off': 'eye'"
+              class="register__form__icon--eye"
+            ></ion-icon>
           </ion-col>
         </ion-row>
-        <div *ngIf="fg.controls.password.touched && !fg.controls.password.valid">Password is too short</div>
+        <div
+          *ngIf="fg.controls.password.touched && !fg.controls.password.valid"
+        >
+          Password is too short
+        </div>
       </ion-grid>
-      <ion-button class="register__form__cta" color="dark" expand="block" size="large" type="submit" [disabled]="!fg.valid"> REGISTER </ion-button>
+      <ion-button
+        class="register__form__cta"
+        color="dark"
+        expand="block"
+        size="large"
+        type="submit"
+        [disabled]="!fg.valid"
+      >
+        REGISTER
+      </ion-button>
     </form>
-    <ion-text class="register__bottom-text"> Already have an account? <a class="register__bottom-text--link" [routerLink]="['/login']">Log in here</a></ion-text>
+    <ion-text class="register__bottom-text">
+      Already have an account?
+      <a class="register__bottom-text--link" [routerLink]="['/login']"
+        >Log in here</a
+      ></ion-text
+    >
   </div>
 </ion-content>
