@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ROOT_URL: 'https://comet-backend-production.up.railway.app',
+  ROOT_URL: 'http://localhost:3000',
 };
 
 /*

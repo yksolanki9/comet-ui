@@ -1,4 +1,11 @@
 .home {
+  &__header {
+    &__icon {
+      font-size: 24px;
+      padding: 8px 14px;
+    }
+  }
+
   &__content {
     padding: 8px;
   }
