@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -27,10 +27,10 @@
 
 ion-content {
   --background: #fafafa;
-  --padding-top: 24px;
-  --padding-end: 16px;
-  --padding-bottom: 24px;
-  --padding-start: 16px;
+  --padding-top: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
 }
 
 .bg-white {
@@ -55,7 +55,8 @@ ion-content {
   text-overflow: ellipsis;
 }
 
-input,textarea {
+input,
+textarea {
   border: 0;
   width: 100%;
 }

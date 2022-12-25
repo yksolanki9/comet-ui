@@ -1,17 +1,19 @@
-$logo-color: #46CDCF;
+$logo-color: #46cdcf;
 
 .login {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 24px 16px;
 
   &__logo {
-    width: 70%;
+    width: 240px;
     margin-top: 40%;
   }
 
   &__form {
     margin-top: 36px;
+    height: 100%;
 
     &__input-container {
       border-bottom: 1px solid $logo-color;
@@ -35,8 +37,7 @@ $logo-color: #46CDCF;
   }
 
   &__bottom-text {
-    position: absolute;
-    bottom: 36px;
+    margin: 36px 0;
 
     &--link {
       color: $logo-color;
