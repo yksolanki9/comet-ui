@@ -9,9 +9,25 @@
 
 <ion-content [ngClass]="{'bg-white': isEditMode}">
   <form [formGroup]="noteForm" class="note__content">
-    <app-date-input formControlName="createdAt" class="note__date input-div" [value]="" [isEditMode]="isEditMode"></app-date-input>
-    <ion-textarea #noteTitle autoGrow="true" class="note__title input-div" placeholder="Title" formControlName="title" [readonly]="!isEditMode"></ion-textarea>
-    <ion-textarea autoGrow="true" #noteContent class="note__body input-div" placeholder="Write more here..." formControlName="content" [readonly]="!isEditMode"></ion-textarea>
+    <app-date-input
+      formControlName="createdAt"
+      class="note__date input-div"
+      [isEditMode]="isEditMode"
+    ></app-date-input>
+    <ion-textarea
+      autoGrow="true"
+      class="note__title input-div"
+      placeholder="Title"
+      formControlName="title"
+      [readonly]="!isEditMode"
+    ></ion-textarea>
+    <ion-textarea
+      autoGrow="true"
+      class="note__body input-div"
+      placeholder="Write more here..."
+      formControlName="content"
+      [readonly]="!isEditMode"
+    ></ion-textarea>
   </form>
   <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="switchMode()">
@@ -20,4 +36,3 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-

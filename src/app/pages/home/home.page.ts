@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  notes: Partial<Note>[];
+  notes: Note[];
 
   constructor(private router: Router, private http: HttpClient) {}
 

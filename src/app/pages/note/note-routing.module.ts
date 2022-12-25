@@ -7,13 +7,13 @@ import { NotePage } from './note.page';
 const routes: Routes = [
   {
     path: ':id',
-    component: NotePage
-  }
+    component: NotePage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class NotePageRoutingModule {}

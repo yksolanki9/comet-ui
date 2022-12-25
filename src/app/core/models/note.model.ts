@@ -1,8 +1,8 @@
 export interface Note {
-  id: number | string;
+  _id: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   title: string;
   content: string;
-  files: any[];
-};
+  files?: any[];
+}

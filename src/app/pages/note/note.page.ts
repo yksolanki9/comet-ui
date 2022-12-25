@@ -1,19 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { notes } from 'src/app/core/data/notes.data';
 import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.page.html',
-  styleUrls: ['./note.page.scss']
+  styleUrls: ['./note.page.scss'],
 })
 export class NotePage implements OnInit {
-  @ViewChild('noteContent') noteContent: ElementRef;
-
-  note: Partial<Note>;
-
   noteForm: FormGroup;
 
   isEditMode = false;
@@ -21,8 +18,9 @@ export class NotePage implements OnInit {
   isNewNote = false;
 
   constructor(
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     const noteId = this.activatedRoute.snapshot.params.id;
@@ -35,23 +33,24 @@ export class NotePage implements OnInit {
       this.isEditMode = true;
     }
 
-    if (noteId && !this.isNewNote) {
-      this.note = notes[noteId];
-    }
-
     this.noteForm = new FormGroup({
-      createdAt: new FormControl(this.isNewNote ? new Date().toISOString(): this.note.createdAt),
-      title: new FormControl(this.isNewNote ? null : this.note.title),
-      content: new FormControl(this.isNewNote ? null : this.note.content),
+      createdAt: new FormControl(new Date().toISOString()),
+      title: new FormControl(),
+      content: new FormControl(),
     });
-  }
 
-  ionViewWillEnter() {
-    if(!this.isNewNote) {
-      setTimeout(() => this.noteForm.patchValue({
-        title: this.note.title,
-        content: this.note.content
-      }), 300);
+    if (noteId && !this.isNewNote) {
+      this.http
+        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${noteId}`)
+        .subscribe((note) => {
+          this.noteForm.patchValue({
+            createdAt: note.createdAt
+              ? note.createdAt
+              : new Date().toISOString(),
+            title: note.title,
+            content: note.content,
+          });
+        });
     }
   }
 

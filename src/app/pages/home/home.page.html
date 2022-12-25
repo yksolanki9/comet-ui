@@ -7,7 +7,10 @@
 <ion-content>
   <div class="home__content">
     <ng-container *ngFor="let note of notes">
-      <app-note-card [note]="note" (openNote)="openNote(note.id)"></app-note-card>
+      <app-note-card
+        [note]="note"
+        (openNote)="openNote(note._id)"
+      ></app-note-card>
     </ng-container>
   </div>
 
