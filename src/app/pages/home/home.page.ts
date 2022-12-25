@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from 'src/app/core/models/note.model';
-import { notes } from 'src/app/core/data/notes.data';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,19 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   notes: Partial<Note>[];
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router, private http: HttpClient) {}
 
-  ngOnInit() {
-    this.notes = notes;
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.http
+      .get<{
+        notes: Note[];
+        userId: string;
+      }>(`${environment.ROOT_URL}/api/v1/notes`)
+      .subscribe((userNotes) => {
+        this.notes = userNotes.notes;
+      });
   }
 
   openNote(noteId: string) {
@@ -24,6 +32,6 @@ export class HomePage implements OnInit {
   }
 
   createNote() {
-    this.router.navigate(['/', 'note','99', { mode: 'add'}]);
+    this.router.navigate(['/', 'note', '99', { mode: 'add' }]);
   }
 }
