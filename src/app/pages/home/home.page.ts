@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Note } from 'src/app/core/models/note.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Preferences } from '@capacitor/preferences';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild('optionsPopover') optionsPopover: PopoverController;
+
   notes: Note[];
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -33,5 +37,11 @@ export class HomePage implements OnInit {
 
   createNote() {
     this.router.navigate(['/', 'note', { mode: 'add' }]);
+  }
+
+  async logout() {
+    this.optionsPopover.dismiss();
+    await Preferences.clear();
+    this.router.navigate(['/', 'login']);
   }
 }

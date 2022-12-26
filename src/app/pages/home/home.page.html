@@ -6,11 +6,17 @@
       class="home__header__icon"
       slot="end"
       name="ellipsis-vertical"
+      id="click-trigger"
     ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-popover #optionsPopover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding" (click)="logout()"> Log Out</ion-content>
+    </ng-template>
+  </ion-popover>
   <div class="home__content">
     <ng-container *ngFor="let note of notes">
       <app-note-card
