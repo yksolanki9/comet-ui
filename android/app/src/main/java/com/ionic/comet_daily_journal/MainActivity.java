@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.ionic.comet_daily_journal;
 
 import com.getcapacitor.BridgeActivity;
 
