@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,11 @@ export class LoginPage implements OnInit {
 
   isPasswordShown = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit() {
     this.fg = new FormGroup({
@@ -26,9 +31,30 @@ export class LoginPage implements OnInit {
     });
   }
 
+  async showErrorMessage(error) {
+    const errorToast = await this.toastController.create({
+      message: error.error,
+      position: 'bottom',
+      duration: 3000,
+      icon: 'warning',
+      color: 'danger',
+      buttons: [
+        {
+          icon: 'close',
+          side: 'end',
+          role: 'cancel',
+        },
+      ],
+      cssClass: 'toast-error',
+    });
+
+    await errorToast.present();
+  }
+
   onSubmit(data) {
-    this.authService
-      .login(data)
-      .subscribe(() => this.router.navigate(['/home']));
+    this.authService.login(data).subscribe({
+      next: () => this.router.navigate(['/home']),
+      error: (err) => this.showErrorMessage(err),
+    });
   }
 }
