@@ -1,13 +1,12 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>note</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngClass]="{'bg-white': mode !== 'VIEW'}">
+<ion-content>
   <ng-container *ngIf="!isLoading; else loader">
     <form [formGroup]="noteForm" class="note__content">
       <app-date-input

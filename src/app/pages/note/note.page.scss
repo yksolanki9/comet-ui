@@ -8,7 +8,7 @@
     color: #404040;
 
     &:empty:before {
-      content: 'Title';
+      content: "Title";
       color: gray;
     }
   }
@@ -18,7 +18,7 @@
     color: #737373;
 
     &:empty:before {
-      content: 'Write more here...';
+      content: "Write more here...";
       color: gray;
     }
   }
