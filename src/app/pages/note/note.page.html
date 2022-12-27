@@ -8,28 +8,62 @@
 </ion-header>
 
 <ion-content [ngClass]="{'bg-white': mode !== 'VIEW'}">
-  <form [formGroup]="noteForm" class="note__content">
-    <app-date-input
-      formControlName="createdAt"
-      class="note__date input-div"
-      [isEditMode]="mode !== 'VIEW'"
-    ></app-date-input>
-    <ion-textarea
-      autoGrow="true"
-      class="note__title input-div"
-      placeholder="Title"
-      formControlName="title"
-      [readonly]="mode === 'VIEW'"
-    ></ion-textarea>
-    <ion-textarea
-      autoGrow="true"
-      class="note__body input-div"
-      placeholder="Write more here..."
-      formControlName="content"
-      [readonly]="mode === 'VIEW'"
-    ></ion-textarea>
-  </form>
-  <ion-fab class="note__fab" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="!isLoading; else loader">
+    <form [formGroup]="noteForm" class="note__content">
+      <app-date-input
+        formControlName="createdAt"
+        class="note__date input-div"
+        [isEditMode]="mode !== 'VIEW'"
+      ></app-date-input>
+      <ion-textarea
+        autoGrow="true"
+        class="note__title input-div"
+        placeholder="Title"
+        formControlName="title"
+        [readonly]="mode === 'VIEW'"
+      ></ion-textarea>
+      <ion-textarea
+        autoGrow="true"
+        class="note__body input-div"
+        placeholder="Write more here..."
+        formControlName="content"
+        [readonly]="mode === 'VIEW'"
+      ></ion-textarea>
+    </form>
+  </ng-container>
+
+  <ng-template #loader>
+    <div class="note__content">
+      <div>
+        <ion-skeleton-text
+          [animated]="true"
+          style="height: 24px; width: 30%"
+        ></ion-skeleton-text>
+      </div>
+      <ion-textarea
+        ><ion-skeleton-text
+          [animated]="true"
+          style="height: 24px; width: 70%"
+        ></ion-skeleton-text
+      ></ion-textarea>
+      <ion-textarea>
+        <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+          <ion-skeleton-text
+            [animated]="true"
+            style="height: 14px"
+          ></ion-skeleton-text>
+        </ng-container>
+      </ion-textarea>
+    </div>
+  </ng-template>
+
+  <ion-fab
+    *ngIf="!isLoading"
+    class="note__fab"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="onFabClicked()">
       <ion-icon *ngIf="mode === 'VIEW'" name="pencil"></ion-icon>
       <ion-icon *ngIf="mode !== 'VIEW'" name="save"></ion-icon>

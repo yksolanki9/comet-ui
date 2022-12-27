@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { noop } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-note',
@@ -18,6 +19,8 @@ export class NotePage implements OnInit {
 
   noteId: string;
 
+  isLoading = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient
@@ -28,6 +31,7 @@ export class NotePage implements OnInit {
 
     if (this.activatedRoute.snapshot.params.mode === 'add') {
       this.mode = 'ADD';
+      this.isLoading = false;
     }
 
     this.noteForm = new FormGroup({
@@ -39,6 +43,7 @@ export class NotePage implements OnInit {
     if (this.noteId) {
       this.http
         .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
+        .pipe(finalize(() => (this.isLoading = false)))
         .subscribe((note) => {
           this.noteForm.patchValue({
             createdAt: note.createdAt
