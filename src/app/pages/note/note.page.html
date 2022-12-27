@@ -3,6 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-icon
+      *ngIf="mode !== 'ADD'"
+      (click)="deleteNote()"
+      slot="end"
+      class="note__header__icon"
+      name="trash-outline"
+    ></ion-icon>
   </ion-toolbar>
 </ion-header>
 

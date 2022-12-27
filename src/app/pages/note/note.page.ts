@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { noop } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-note',
@@ -23,7 +24,9 @@ export class NotePage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit() {
@@ -73,5 +76,13 @@ export class NotePage implements OnInit {
     } else {
       this.mode = 'EDIT';
     }
+  }
+
+  deleteNote() {
+    this.loaderService.showLoader();
+    this.http
+      .delete(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
+      .pipe(finalize(() => this.loaderService.hideLoader()))
+      .subscribe(() => this.router.navigate(['/home']));
   }
 }
