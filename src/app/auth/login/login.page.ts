@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastController } from '@ionic/angular';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit() {
@@ -52,9 +55,13 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit(data) {
-    this.authService.login(data).subscribe({
-      next: () => this.router.navigate(['/home']),
-      error: (err) => this.showErrorMessage(err),
-    });
+    this.loaderService.showLoader();
+    this.authService
+      .login(data)
+      .pipe(finalize(() => this.loaderService.hideLoader()))
+      .subscribe({
+        next: () => this.router.navigate(['/home']),
+        error: (err) => this.showErrorMessage(err),
+      });
   }
 }

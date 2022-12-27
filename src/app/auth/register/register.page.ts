@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,11 @@ export class RegisterPage implements OnInit {
 
   isPasswordShown = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit() {
     this.fg = new FormGroup({
@@ -34,8 +40,12 @@ export class RegisterPage implements OnInit {
   ionViewWillEnter() {}
 
   onSubmit(data) {
-    this.authService.register(data).subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.loaderService.showLoader();
+    this.authService
+      .register(data)
+      .pipe(finalize(() => this.loaderService.hideLoader()))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+      });
   }
 }
