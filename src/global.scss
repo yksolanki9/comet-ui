@@ -76,3 +76,7 @@ textarea {
 .toast-error {
   transform: translateY(-36px);
 }
+
+ion-skeleton-text {
+  --border-radius: 4px;
+}

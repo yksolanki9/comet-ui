@@ -17,13 +17,43 @@
       <ion-content class="ion-padding" (click)="logout()"> Log Out</ion-content>
     </ng-template>
   </ion-popover>
+
   <div class="home__content">
-    <ng-container *ngFor="let note of notes">
-      <app-note-card
-        [note]="note"
-        (openNote)="openNote(note._id)"
-      ></app-note-card>
+    <ng-container *ngIf="!isLoading; else loader">
+      <ng-container *ngFor="let note of notes">
+        <app-note-card
+          [note]="note"
+          (openNote)="openNote(note._id)"
+        ></app-note-card>
+      </ng-container>
     </ng-container>
+
+    <ng-template #loader>
+      <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9]">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-skeleton-text
+                style="height: 24px; width: 30%"
+                [animated]="true"
+              ></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-subtitle>
+              <ion-skeleton-text
+                style="height: 14px; width: 70%"
+                [animated]="true"
+              ></ion-skeleton-text
+            ></ion-card-subtitle>
+            <ion-card-subtitle>
+              <ion-skeleton-text
+                style="height: 14px"
+                [animated]="true"
+              ></ion-skeleton-text
+            ></ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ng-container>
+    </ng-template>
   </div>
 
   <ion-fab class="home__fab" vertical="bottom" horizontal="end" slot="fixed">

@@ -16,11 +16,14 @@ export class HomePage implements OnInit {
 
   notes: Note[];
 
+  isLoading = true;
+
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
+    this.isLoading = true;
     this.http
       .get<{
         notes: Note[];
@@ -28,6 +31,7 @@ export class HomePage implements OnInit {
       }>(`${environment.ROOT_URL}/api/v1/notes`)
       .subscribe((userNotes) => {
         this.notes = userNotes.notes;
+        this.isLoading = false;
       });
   }
 

@@ -11,7 +11,7 @@ export class NoteCardComponent implements OnInit {
 
   @Output() openNote = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
