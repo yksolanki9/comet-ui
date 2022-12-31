@@ -1,4 +1,18 @@
 .home {
+  &__zero-state {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__subtitle {
+      padding-top: 8px;
+
+      &__icon {
+        font-size: 24px;
+        transform: translateY(6px);
+      }
+    }
+  }
   &__header {
     &__title {
       font-size: 24px;

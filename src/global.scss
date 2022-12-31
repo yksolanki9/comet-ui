@@ -77,6 +77,16 @@ textarea {
   transform: translateY(-36px);
 }
 
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
 ion-skeleton-text {
   --border-radius: 4px;
 }

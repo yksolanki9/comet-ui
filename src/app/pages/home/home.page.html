@@ -18,14 +18,36 @@
     </ng-template>
   </ion-popover>
 
-  <div class="home__content">
+  <div class="home__content h-max">
     <ng-container *ngIf="!isLoading; else loader">
-      <ng-container *ngFor="let note of notes">
-        <app-note-card
-          [note]="note"
-          (openNote)="openNote(note._id)"
-        ></app-note-card>
+      <ng-container *ngIf="notes?.length > 0; else zeroState">
+        <ng-container *ngFor="let note of notes">
+          <app-note-card
+            [note]="note"
+            (openNote)="openNote(note._id)"
+          ></app-note-card>
+        </ng-container>
       </ng-container>
+
+      <ng-template #zeroState>
+        <div class="h-max content-center text-center">
+          <div class="home__zero-state">
+            <div class="home__zero-state__title">
+              Looks like you don't have any saved notes
+            </div>
+            <div class="home__zero-state__subtitle">
+              Click on
+              <ion-icon
+                size="medium"
+                color="primary"
+                class="home__zero-state__subtitle__icon"
+                name="add-circle-sharp"
+              ></ion-icon>
+              to create a new note
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </ng-container>
 
     <ng-template #loader>

@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
         userId: string;
       }>(`${environment.ROOT_URL}/api/v1/notes`)
       .subscribe((userNotes) => {
-        this.notes = userNotes.notes;
+        this.notes = userNotes?.notes || [];
         this.isLoading = false;
       });
   }
