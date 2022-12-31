@@ -34,9 +34,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async showErrorMessage(error) {
+  async showErrorMessage(errorMessage) {
     const errorToast = await this.toastController.create({
-      message: error.error,
+      message: errorMessage || 'Something went wrong',
       position: 'bottom',
       duration: 3000,
       icon: 'warning',
@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
       .pipe(finalize(() => this.loaderService.hideLoader()))
       .subscribe({
         next: () => this.router.navigate(['/home']),
-        error: (err) => this.showErrorMessage(err),
+        error: (err) => this.showErrorMessage(err?.error?.message),
       });
   }
 }
