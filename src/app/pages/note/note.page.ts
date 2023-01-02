@@ -38,7 +38,7 @@ export class NotePage implements OnInit {
     }
 
     this.noteForm = new FormGroup({
-      createdAt: new FormControl(new Date().toISOString()),
+      dateOfEntry: new FormControl(new Date().toISOString()),
       title: new FormControl(),
       content: new FormControl(),
     });
@@ -49,9 +49,7 @@ export class NotePage implements OnInit {
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe((note) => {
           this.noteForm.patchValue({
-            createdAt: note.createdAt
-              ? note.createdAt
-              : new Date().toISOString(),
+            dateOfEntry: note.dateOfEntry,
             title: note.title,
             content: note.content,
           });

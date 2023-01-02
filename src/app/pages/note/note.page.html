@@ -17,7 +17,7 @@
   <ng-container *ngIf="!isLoading; else loader">
     <form [formGroup]="noteForm" class="note__content">
       <app-date-input
-        formControlName="createdAt"
+        formControlName="dateOfEntry"
         class="note__date input-div"
         [isEditMode]="mode !== 'VIEW'"
       ></app-date-input>
