@@ -17,6 +17,6 @@ import { DateInputComponent } from './date-input/date-input.component';
     NotePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [NotePage, DateInputComponent]
+  declarations: [NotePage, DateInputComponent],
 })
 export class NotePageModule {}

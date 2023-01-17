@@ -15,12 +15,10 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 })
 export class NotePage implements OnInit {
   noteForm: FormGroup;
-
   mode: 'ADD' | 'EDIT' | 'VIEW' = 'VIEW';
-
   noteId: string;
-
   isLoading = true;
+  uploadInProgress = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -82,5 +80,30 @@ export class NotePage implements OnInit {
       .delete(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
       .pipe(finalize(() => this.loaderService.hideLoader()))
       .subscribe(() => this.router.navigate(['/home']));
+  }
+
+  handleSuccess(event) {
+    console.log('iMAGE UPLOADED SCCESSFULLY', event);
+  }
+
+  convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
+  }
+
+  async uploadImage(event) {
+    this.uploadInProgress = true;
+    const file = event.target.files[0];
+    const base64 = await this.convertToBase64(file);
+    this.http
+      .post(`${environment.ROOT_URL}/api/v1/imagekit`, {
+        fileName: file.name,
+        base64,
+      })
+      .subscribe(() => (this.uploadInProgress = false));
   }
 }

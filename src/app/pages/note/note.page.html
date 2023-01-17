@@ -3,6 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <!-- <ion-input type="file" (change)="uploadImage()"> </ion-input> -->
+    <!-- <ion-icon
+      slot="end"
+      (click)="uploadImage()"
+      class="note__header__icon"
+      name="images-outline"
+    ></ion-icon> -->
     <ion-icon
       *ngIf="mode !== 'ADD'"
       (click)="deleteNote()"
@@ -14,6 +21,12 @@
 </ion-header>
 
 <ion-content>
+  <div>Normal input</div>
+  <ion-input
+    type="file"
+    accept="image/*"
+    (change)="uploadImage($event)"
+  ></ion-input>
   <ng-container *ngIf="!isLoading; else loader">
     <form [formGroup]="noteForm" class="note__content">
       <app-date-input
