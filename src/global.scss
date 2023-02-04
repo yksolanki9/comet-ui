@@ -29,12 +29,20 @@
   --ion-font-family: "Poppins", sans-serif;
 }
 
+ion-toolbar {
+  --background: rgba(83, 138, 214, 0.2);
+}
+
 ion-content {
-  --background: white;
+  --background: rgba(83, 138, 214, 0.2);
   --padding-top: 0;
   --padding-end: 0;
   --padding-bottom: 0;
   --padding-start: 0;
+}
+
+ion-fab-button {
+  --background: rgba(83, 138, 214, 1);
 }
 
 .bg-white {

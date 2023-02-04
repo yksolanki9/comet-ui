@@ -1,12 +1,27 @@
 .note-card {
+  // border: 1px solid lightgray;
+  padding: 20px 12px;
+  border-radius: 8px;
+  margin: 16px;
+  background: rgba(83, 138, 214, 0.2);
+  overflow: hidden;
+  position: relative;
+
   &__title {
     color: #404040;
+    font-size: 20px;
+    font-weight: 600;
   }
 
   &__date {
-    &--sm {
-      font-size: 16px;
-      color: #404040;
-    }
+    font-size: 16px;
+    // &--sm {
+    //   font-size: 16px;
+    //   color: #404040;
+    // }
+  }
+
+  &__content {
+    font-size: 12px;
   }
 }

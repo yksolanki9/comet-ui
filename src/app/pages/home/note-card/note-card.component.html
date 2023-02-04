@@ -1,16 +1,12 @@
-<ion-card (click)="expandNote()" button>
-  <ion-card-header>
-    <ion-card-title>
-      <span> {{ note.dateOfEntry | date : "d" }} </span>
-      <span class="note-card__date--sm">
-        {{ note.dateOfEntry | date : "MMM y" }}
-      </span>
-    </ion-card-title>
-    <ion-card-subtitle class="text-ellipsis note-card__title">
-      {{ note.title }}
-    </ion-card-subtitle>
-    <ion-card-subtitle class="text-ellipsis">
-      {{ note.content }}
-    </ion-card-subtitle>
-  </ion-card-header>
-</ion-card>
+<div class="note-card ion-activatable" (click)="expandNote()" button>
+  <div class="note-card__date">
+    {{ note.dateOfEntry | date : "d MMM y" }}
+  </div>
+  <div class="text-ellipsis note-card__title">
+    {{ note.title }}
+  </div>
+  <div class="text-ellipsis note-card__content">
+    {{ note.content }}
+  </div>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>
