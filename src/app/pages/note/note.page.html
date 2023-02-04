@@ -21,12 +21,12 @@
 </ion-header>
 
 <ion-content>
-  <div>Normal input</div>
+  <!-- <div>Normal input</div>
   <ion-input
     type="file"
     accept="image/*"
     (change)="uploadImage($event)"
-  ></ion-input>
+  ></ion-input> -->
   <ng-container *ngIf="!isLoading; else loader">
     <form [formGroup]="noteForm" class="note__content">
       <app-date-input

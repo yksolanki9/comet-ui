@@ -7,11 +7,13 @@
   }
 
   &__content {
-    padding: 24px 16px;
+    padding: 24px;
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.5;
     color: #404040;
 
     &:empty:before {
@@ -21,7 +23,8 @@
   }
 
   &__body {
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 1.5;
     color: #737373;
 
     &:empty:before {
