@@ -9,6 +9,8 @@ import { Note } from 'src/app/core/models/note.model';
 export class NoteCardComponent implements OnInit {
   @Input() note: Note;
 
+  @Input() isLoading = false;
+
   @Output() openNote = new EventEmitter<void>();
 
   constructor() {}

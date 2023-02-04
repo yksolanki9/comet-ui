@@ -1,12 +1,31 @@
-<div class="note-card ion-activatable" (click)="expandNote()" button>
-  <div class="note-card__date">
-    {{ note.dateOfEntry | date : "d MMM y" }}
+<ng-container *ngIf="!isLoading; else loader">
+  <div class="note-card ion-activatable" (click)="expandNote()" button>
+    <div class="note-card__date">
+      {{ note.dateOfEntry | date : "d MMM y" }}
+    </div>
+    <div class="text-ellipsis note-card__title">
+      {{ note.title }}
+    </div>
+    <div class="text-ellipsis note-card__content">
+      {{ note.content }}
+    </div>
+    <ion-ripple-effect></ion-ripple-effect>
   </div>
-  <div class="text-ellipsis note-card__title">
-    {{ note.title }}
+</ng-container>
+
+<ng-template #loader>
+  <div class="note-card">
+    <ion-skeleton-text
+      style="height: 16px; width: 30%"
+      [animated]="true"
+    ></ion-skeleton-text>
+    <ion-skeleton-text
+      style="height: 20px; width: 70%"
+      [animated]="true"
+    ></ion-skeleton-text>
+    <ion-skeleton-text
+      style="height: 12px"
+      [animated]="true"
+    ></ion-skeleton-text>
   </div>
-  <div class="text-ellipsis note-card__content">
-    {{ note.content }}
-  </div>
-  <ion-ripple-effect></ion-ripple-effect>
-</div>
+</ng-template>

@@ -18,7 +18,7 @@
     </ng-template>
   </ion-popover>
 
-  <div class="home__content h-max">
+  <div [ngClass]="{'h-max': notes?.length === 0}" class="home__content">
     <ng-container *ngIf="!isLoading; else loader">
       <ng-container *ngIf="notes?.length > 0; else zeroState">
         <ng-container *ngFor="let note of notes">
@@ -52,28 +52,7 @@
 
     <ng-template #loader>
       <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9]">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-skeleton-text
-                style="height: 24px; width: 30%"
-                [animated]="true"
-              ></ion-skeleton-text>
-            </ion-card-title>
-            <ion-card-subtitle>
-              <ion-skeleton-text
-                style="height: 14px; width: 70%"
-                [animated]="true"
-              ></ion-skeleton-text
-            ></ion-card-subtitle>
-            <ion-card-subtitle>
-              <ion-skeleton-text
-                style="height: 14px"
-                [animated]="true"
-              ></ion-skeleton-text
-            ></ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <app-note-card [isLoading]="true"></app-note-card>
       </ng-container>
     </ng-template>
   </div>
