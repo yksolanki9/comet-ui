@@ -45,10 +45,10 @@ export class NotePage implements OnInit {
       this.uploadInProgress = true;
 
       this.http
-        .patch(
-          `${environment.ROOT_URL}/api/v1/note/${this.noteId}`,
-          this.noteForm.value
-        )
+        .patch(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`, {
+          ...this.noteForm.value,
+          images: this.imageFiles,
+        })
         .subscribe(() => (this.uploadInProgress = false));
       this.mode = 'VIEW';
     } else {
@@ -108,7 +108,9 @@ export class NotePage implements OnInit {
   }
 
   async openFileExplorer(event) {
-    this.imageInput.nativeElement.click();
+    if (this.mode === 'EDIT') {
+      this.imageInput.nativeElement.click();
+    }
   }
 
   async handleFileSelect(event) {
