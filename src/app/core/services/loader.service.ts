@@ -7,10 +7,9 @@ import { LoadingController } from '@ionic/angular';
 export class LoaderService {
   constructor(private loadingController: LoadingController) {}
 
-  async showLoader(message = 'Please wait...', duration = 3000) {
+  async showLoader(message = 'Please wait...') {
     const loader = await this.loadingController.create({
       message,
-      duration,
       spinner: 'dots',
     });
 
