@@ -3,13 +3,6 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <!-- <ion-input type="file" (change)="uploadImage()"> </ion-input> -->
-    <!-- <ion-icon
-      slot="end"
-      (click)="uploadImage()"
-      class="note__header__icon"
-      name="images-outline"
-    ></ion-icon> -->
     <ion-icon
       *ngIf="mode !== 'ADD'"
       (click)="deleteNote()"
@@ -21,13 +14,40 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div>Normal input</div>
-  <ion-input
+  <input
+    #imageInput
     type="file"
     accept="image/*"
-    (change)="uploadImage($event)"
-  ></ion-input> -->
+    class="d-none"
+    (change)="handleFileSelect($event)"
+  />
   <ng-container *ngIf="!isLoading; else loader">
+    <div (click)="openFileExplorer($event)" class="note__img">
+      <ng-container *ngIf="imageFiles?.length === 0">
+        <div class="note__img__icon-container">
+          <ion-icon
+            class="note__img__icon-container__icon"
+            name="cloud-upload-outline"
+          ></ion-icon>
+        </div>
+        <div class="note__img__content">Click here to upload an image</div>
+      </ng-container>
+
+      <ng-container *ngIf="imageFiles?.length > 0">
+        <div
+          class="h-max w-max"
+          [ngClass]="{'note__img--loading': uploadInProgress}"
+        >
+          <img class="note__img__img" [src]="imageFiles[0]" />
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-progress-bar
+      *ngIf="uploadInProgress"
+      class="note__img-progress-bar"
+      type="indeterminate"
+    ></ion-progress-bar>
     <form [formGroup]="noteForm" class="note__content">
       <app-date-input
         formControlName="dateOfEntry"

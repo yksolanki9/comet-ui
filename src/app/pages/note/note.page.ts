@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,11 +14,13 @@ import { LoaderService } from 'src/app/core/services/loader.service';
   styleUrls: ['./note.page.scss'],
 })
 export class NotePage implements OnInit {
+  @ViewChild('imageInput') imageInput: ElementRef;
   noteForm: FormGroup;
   mode: 'ADD' | 'EDIT' | 'VIEW' = 'VIEW';
   noteId: string;
   isLoading = true;
   uploadInProgress = false;
+  imageFiles: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -86,24 +88,35 @@ export class NotePage implements OnInit {
     console.log('iMAGE UPLOADED SCCESSFULLY', event);
   }
 
-  convertToBase64(file) {
+  convertToBase64(file): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
+      reader.onload = () => resolve(reader.result as string);
       reader.onerror = (err) => reject(err);
     });
   }
 
-  async uploadImage(event) {
-    this.uploadInProgress = true;
-    const file = event.target.files[0];
-    const base64 = await this.convertToBase64(file);
-    this.http
-      .post(`${environment.ROOT_URL}/api/v1/imagekit`, {
-        fileName: file.name,
-        base64,
-      })
-      .subscribe(() => (this.uploadInProgress = false));
+  async openFileExplorer(event) {
+    this.imageInput.nativeElement.click();
+  }
+
+  async handleFileSelect(event) {
+    if (event.target.files.length) {
+      this.uploadInProgress = true;
+
+      const selectedFile = event.target.files[0];
+
+      const base64 = await this.convertToBase64(selectedFile);
+      this.imageFiles.push(base64);
+      this.http
+        .post(`${environment.ROOT_URL}/api/v1/imagekit`, {
+          fileName: selectedFile.name,
+          base64,
+        })
+        .subscribe(() => (this.uploadInProgress = false));
+    } else {
+      this.uploadInProgress = false;
+    }
   }
 }

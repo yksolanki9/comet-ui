@@ -6,6 +6,40 @@
     }
   }
 
+  &__img {
+    height: 35%;
+    text-align: center;
+    background: rgba(83, 138, 214, 0.2);
+
+    &--loading {
+      opacity: 0.5;
+    }
+
+    &__icon-container {
+      padding-top: 20%;
+      color: #46cdcf;
+
+      &__icon {
+        font-size: 80px;
+      }
+    }
+
+    &__content {
+      font-weight: 500;
+      color: #737373;
+    }
+
+    &__img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &__img-progress-bar {
+    --background: rgba(83, 138, 214, 0.2);
+    --progress-background: rgba(83, 138, 214, 0.5);
+  }
+
   &__content {
     padding: 24px;
   }
