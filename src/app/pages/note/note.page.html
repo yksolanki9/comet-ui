@@ -22,15 +22,17 @@
     (change)="handleFileSelect($event)"
   />
   <ng-container *ngIf="!isLoading; else loader">
-    <div (click)="openFileExplorer($event)" class="note__img">
+    <div class="note__img">
       <ng-container *ngIf="imageFiles?.length === 0">
-        <div class="note__img__icon-container">
-          <ion-icon
-            class="note__img__icon-container__icon"
-            name="cloud-upload-outline"
-          ></ion-icon>
+        <div (click)="openFileExplorer($event)" class="h-max">
+          <div class="note__img__icon-container">
+            <ion-icon
+              class="note__img__icon-container__icon"
+              name="cloud-upload-outline"
+            ></ion-icon>
+          </div>
+          <div class="note__img__content">Click here to upload an image</div>
         </div>
-        <div class="note__img__content">Click here to upload an image</div>
       </ng-container>
 
       <ng-container *ngIf="imageFiles?.length > 0">
@@ -38,7 +40,10 @@
           class="h-max w-max"
           [ngClass]="{'note__img--loading': uploadInProgress}"
         >
-          <img class="note__img__img" [src]="imageFiles[0]" />
+          <img
+            class="note__img__img"
+            [src]="imageFiles[0]?.base64 || imageFiles[0]?.url"
+          />
         </div>
       </ng-container>
     </div>

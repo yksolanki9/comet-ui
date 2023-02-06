@@ -5,5 +5,21 @@ export interface Note {
   dateOfEntry: string;
   title: string;
   content: string;
-  files?: any[];
+  images: Image[];
+}
+
+interface Image {
+  fileId: string;
+  name: string;
+  size: number;
+  versionInfo: {
+    id: string;
+    name: string;
+  };
+  filePath: string;
+  url: string;
+  fileType: string;
+  height: number;
+  width: number;
+  thumbnailUrl: string;
 }

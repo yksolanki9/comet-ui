@@ -20,7 +20,7 @@ export class NotePage implements OnInit {
   noteId: string;
   isLoading = true;
   uploadInProgress = false;
-  imageFiles: string[] = [];
+  imageFiles = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,47 +29,27 @@ export class NotePage implements OnInit {
     private loaderService: LoaderService
   ) {}
 
-  ngOnInit() {
-    this.noteId = this.activatedRoute.snapshot.params.id;
-
-    if (this.activatedRoute.snapshot.params.mode === 'add') {
-      this.mode = 'ADD';
-      this.isLoading = false;
-    }
-
-    this.noteForm = new FormGroup({
-      dateOfEntry: new FormControl(new Date().toISOString()),
-      title: new FormControl(),
-      content: new FormControl(),
-    });
-
-    if (this.noteId) {
-      this.http
-        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe((note) => {
-          this.noteForm.patchValue({
-            dateOfEntry: note.dateOfEntry,
-            title: note.title,
-            content: note.content,
-          });
-        });
-    }
-  }
+  ngOnInit() {}
 
   onFabClicked() {
     if (this.mode === 'ADD') {
+      this.uploadInProgress = true;
       this.http
-        .post(`${environment.ROOT_URL}/api/v1/note`, this.noteForm.value)
-        .subscribe(noop);
+        .post(`${environment.ROOT_URL}/api/v1/note`, {
+          ...this.noteForm.value,
+          images: this.imageFiles,
+        })
+        .subscribe(() => (this.uploadInProgress = false));
       this.mode = 'VIEW';
     } else if (this.mode === 'EDIT') {
+      this.uploadInProgress = true;
+
       this.http
         .patch(
           `${environment.ROOT_URL}/api/v1/note/${this.noteId}`,
           this.noteForm.value
         )
-        .subscribe(noop);
+        .subscribe(() => (this.uploadInProgress = false));
       this.mode = 'VIEW';
     } else {
       this.mode = 'EDIT';
@@ -97,26 +77,49 @@ export class NotePage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    this.imageFiles = [];
+    this.noteId = this.activatedRoute.snapshot.params.id;
+
+    if (this.activatedRoute.snapshot.params.mode === 'add') {
+      this.mode = 'ADD';
+      this.isLoading = false;
+    }
+
+    this.noteForm = new FormGroup({
+      dateOfEntry: new FormControl(new Date().toISOString()),
+      title: new FormControl(),
+      content: new FormControl(),
+    });
+
+    if (this.noteId) {
+      this.http
+        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
+        .pipe(finalize(() => (this.isLoading = false)))
+        .subscribe((note) => {
+          this.noteForm.patchValue({
+            dateOfEntry: note.dateOfEntry,
+            title: note.title,
+            content: note.content,
+          });
+          this.imageFiles = note.images;
+        });
+    }
+  }
+
   async openFileExplorer(event) {
     this.imageInput.nativeElement.click();
   }
 
   async handleFileSelect(event) {
     if (event.target.files.length) {
-      this.uploadInProgress = true;
-
       const selectedFile = event.target.files[0];
 
       const base64 = await this.convertToBase64(selectedFile);
-      this.imageFiles.push(base64);
-      this.http
-        .post(`${environment.ROOT_URL}/api/v1/imagekit`, {
-          fileName: selectedFile.name,
-          base64,
-        })
-        .subscribe(() => (this.uploadInProgress = false));
-    } else {
-      this.uploadInProgress = false;
+      this.imageFiles.push({
+        name: selectedFile.name,
+        base64,
+      });
     }
   }
 }
