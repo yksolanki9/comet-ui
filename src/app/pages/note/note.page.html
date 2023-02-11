@@ -39,6 +39,7 @@
         <div
           class="h-max w-max"
           [ngClass]="{'note__img--loading': uploadInProgress}"
+          (click)="openImagePreview()"
         >
           <img
             class="note__img__img"
