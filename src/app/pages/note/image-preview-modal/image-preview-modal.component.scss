@@ -1,0 +1,12 @@
+.image-preview {
+  &__close-icon {
+    font-size: 30px;
+  }
+
+  &__container {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

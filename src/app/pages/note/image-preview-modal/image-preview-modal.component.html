@@ -1,0 +1,18 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon
+          class="image-preview__close-icon"
+          name="close-outline"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="image-preview__container">
+    <img [src]="images[0]?.base64 || images[0]?.url" />
+  </div>
+</ion-content>

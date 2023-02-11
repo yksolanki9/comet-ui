@@ -8,6 +8,7 @@ import { NotePageRoutingModule } from './note-routing.module';
 
 import { NotePage } from './note.page';
 import { DateInputComponent } from './date-input/date-input.component';
+import { ImagePreviewModalComponent } from './image-preview-modal/image-preview-modal.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { DateInputComponent } from './date-input/date-input.component';
     NotePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [NotePage, DateInputComponent],
+  declarations: [NotePage, DateInputComponent, ImagePreviewModalComponent],
 })
 export class NotePageModule {}

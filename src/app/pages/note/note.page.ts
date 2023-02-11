@@ -4,9 +4,10 @@ import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { noop } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { ModalController } from '@ionic/angular';
+import { ImagePreviewModalComponent } from './image-preview-modal/image-preview-modal.component';
 
 @Component({
   selector: 'app-note',
@@ -26,7 +27,8 @@ export class NotePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {}
@@ -54,6 +56,17 @@ export class NotePage implements OnInit {
     } else {
       this.mode = 'EDIT';
     }
+  }
+
+  async openImagePreview() {
+    const imagePreviewModal = await this.modalController.create({
+      component: ImagePreviewModalComponent,
+      componentProps: {
+        images: this.imageFiles,
+      },
+    });
+
+    imagePreviewModal.present();
   }
 
   deleteNote() {
