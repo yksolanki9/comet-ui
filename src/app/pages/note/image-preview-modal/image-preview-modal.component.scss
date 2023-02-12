@@ -22,4 +22,21 @@
   &__swiper-slide {
     height: auto;
   }
+
+  &__nav-icon {
+    font-size: 28px;
+    position: absolute;
+    top: 48%;
+    z-index: 2;
+  }
+
+  &__nav-left {
+    @extend .image-preview__nav-icon;
+    left: 0;
+  }
+
+  &__nav-right {
+    @extend .image-preview__nav-icon;
+    right: 0;
+  }
 }

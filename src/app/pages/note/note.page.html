@@ -42,18 +42,26 @@
       </ng-container>
 
       <ng-container *ngIf="imageFiles?.length > 0">
+        <ion-icon
+          *ngIf="imageFiles?.length > 1"
+          class="note__img__nav-left"
+          name="caret-back-outline"
+        ></ion-icon>
         <swiper-container
           class="h-max w-max"
           [ngClass]="{'note__img--loading': uploadInProgress}"
         >
-          <swiper-slide *ngFor="let image of imageFiles"
-            ><div class="h-max note__img__swiper-slide">
-              <img
-                class="note__img__img"
-                [src]="image.base64 || image.url"
-              /></div
-          ></swiper-slide>
+          <swiper-slide *ngFor="let image of imageFiles">
+            <div class="h-max note__img__swiper-slide">
+              <img class="note__img__img" [src]="image.base64 || image.url" />
+            </div>
+          </swiper-slide>
         </swiper-container>
+        <ion-icon
+          *ngIf="imageFiles?.length > 1"
+          class="note__img__nav-right"
+          name="caret-forward-outline"
+        ></ion-icon>
       </ng-container>
     </div>
 

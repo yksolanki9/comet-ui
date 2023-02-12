@@ -7,7 +7,7 @@
 
     &__image-icon {
       font-size: 26px;
-      padding: 8px 4px;
+      padding: 8px;
       margin-top: 2px;
     }
   }
@@ -44,6 +44,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    &__nav-icon {
+      font-size: 28px;
+      position: absolute;
+      top: 30%;
+      z-index: 2;
+      color: #404040;
+    }
+
+    &__nav-left {
+      @extend .note__img__nav-icon;
+      left: 0;
+    }
+
+    &__nav-right {
+      @extend .note__img__nav-icon;
+      right: 0;
     }
   }
 
