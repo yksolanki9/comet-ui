@@ -12,10 +12,14 @@
 </ion-header>
 
 <ion-content>
-  <swiper-container>
-    <swiper-slide *ngFor="let image of images"
-      ><div class="image-preview__container">
-        <img [src]="image.base64 || image.url" /></div
-    ></swiper-slide>
-  </swiper-container>
+  <div class="image-preview__content">
+    <swiper-container class="swiper image-preview__swiper-container">
+      <swiper-slide
+        *ngFor="let image of images"
+        class="swiper image-preview__swiper-slide"
+        ><div class="image-preview__container">
+          <img [src]="image.base64 || image.url" /></div
+      ></swiper-slide>
+    </swiper-container>
+  </div>
 </ion-content>

@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { register } from 'swiper/element/bundle';
 
 @Component({
   selector: 'app-image-preview-modal',
   templateUrl: './image-preview-modal.component.html',
   styleUrls: ['./image-preview-modal.component.scss'],
 })
-export class ImagePreviewModalComponent implements OnInit, AfterViewInit {
+export class ImagePreviewModalComponent implements OnInit {
   @Input() images = [];
 
   constructor(private modalController: ModalController) {}
@@ -16,9 +15,5 @@ export class ImagePreviewModalComponent implements OnInit, AfterViewInit {
 
   closeModal() {
     this.modalController.dismiss();
-  }
-
-  ngAfterViewInit() {
-    register();
   }
 }

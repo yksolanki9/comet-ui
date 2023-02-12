@@ -3,10 +3,23 @@
     font-size: 30px;
   }
 
+  &__content {
+    margin: 24px;
+  }
+
   &__container {
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__swiper-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__swiper-slide {
+    height: auto;
   }
 }

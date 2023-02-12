@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon
-        (click)="openFileExplorer($event)"
+        (click)="openFileExplorer()"
         class="note__header__image-icon"
         name="image-outline"
       ></ion-icon>
@@ -28,9 +28,9 @@
     (change)="handleFileSelect($event)"
   />
   <ng-container *ngIf="!isLoading; else loader">
-    <div class="note__img">
+    <div class="note__img" (click)="onClickImageContainer($event)">
       <ng-container *ngIf="imageFiles?.length === 0">
-        <div (click)="openFileExplorer($event)" class="h-max">
+        <div class="h-max">
           <div class="note__img__icon-container">
             <ion-icon
               class="note__img__icon-container__icon"
@@ -42,16 +42,18 @@
       </ng-container>
 
       <ng-container *ngIf="imageFiles?.length > 0">
-        <div
+        <swiper-container
           class="h-max w-max"
           [ngClass]="{'note__img--loading': uploadInProgress}"
-          (click)="openImagePreview()"
         >
-          <img
-            class="note__img__img"
-            [src]="imageFiles[0]?.base64 || imageFiles[0]?.url"
-          />
-        </div>
+          <swiper-slide *ngFor="let image of imageFiles"
+            ><div class="h-max note__img__swiper-slide">
+              <img
+                class="note__img__img"
+                [src]="image.base64 || image.url"
+              /></div
+          ></swiper-slide>
+        </swiper-container>
       </ng-container>
     </div>
 
