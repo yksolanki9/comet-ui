@@ -3,10 +3,40 @@
     font-size: 30px;
   }
 
+  &__content {
+    margin: 24px;
+  }
+
   &__container {
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__swiper-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__swiper-slide {
+    height: auto;
+  }
+
+  &__nav-icon {
+    font-size: 28px;
+    position: absolute;
+    top: 48%;
+    z-index: 2;
+  }
+
+  &__nav-left {
+    @extend .image-preview__nav-icon;
+    left: 0;
+  }
+
+  &__nav-right {
+    @extend .image-preview__nav-icon;
+    right: 0;
   }
 }

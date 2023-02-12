@@ -3,13 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-icon
-      *ngIf="mode !== 'ADD'"
-      (click)="deleteNote()"
-      slot="end"
-      class="note__header__icon"
-      name="trash-outline"
-    ></ion-icon>
+    <ion-buttons slot="end">
+      <ion-icon
+        (click)="openFileExplorer()"
+        class="note__header__image-icon"
+        name="image-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="mode !== 'ADD'"
+        (click)="deleteNote()"
+        class="note__header__delete-icon"
+        name="trash-outline"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -22,9 +28,9 @@
     (change)="handleFileSelect($event)"
   />
   <ng-container *ngIf="!isLoading; else loader">
-    <div class="note__img">
+    <div class="note__img" (click)="onClickImageContainer($event)">
       <ng-container *ngIf="imageFiles?.length === 0">
-        <div (click)="openFileExplorer($event)" class="h-max">
+        <div class="h-max">
           <div class="note__img__icon-container">
             <ion-icon
               class="note__img__icon-container__icon"
@@ -36,16 +42,26 @@
       </ng-container>
 
       <ng-container *ngIf="imageFiles?.length > 0">
-        <div
+        <ion-icon
+          *ngIf="imageFiles?.length > 1"
+          class="note__img__nav-left"
+          name="caret-back-outline"
+        ></ion-icon>
+        <swiper-container
           class="h-max w-max"
           [ngClass]="{'note__img--loading': uploadInProgress}"
-          (click)="openImagePreview()"
         >
-          <img
-            class="note__img__img"
-            [src]="imageFiles[0]?.base64 || imageFiles[0]?.url"
-          />
-        </div>
+          <swiper-slide *ngFor="let image of imageFiles">
+            <div class="h-max note__img__swiper-slide">
+              <img class="note__img__img" [src]="image.base64 || image.url" />
+            </div>
+          </swiper-slide>
+        </swiper-container>
+        <ion-icon
+          *ngIf="imageFiles?.length > 1"
+          class="note__img__nav-right"
+          name="caret-forward-outline"
+        ></ion-icon>
       </ng-container>
     </div>
 

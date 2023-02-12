@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from 'src/app/core/models/note.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -8,13 +14,14 @@ import { finalize } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ModalController } from '@ionic/angular';
 import { ImagePreviewModalComponent } from './image-preview-modal/image-preview-modal.component';
+import { register } from 'swiper/element/bundle';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.page.html',
   styleUrls: ['./note.page.scss'],
 })
-export class NotePage implements OnInit {
+export class NotePage implements OnInit, AfterViewInit {
   @ViewChild('imageInput') imageInput: ElementRef;
   noteForm: FormGroup;
   mode: 'ADD' | 'EDIT' | 'VIEW' = 'VIEW';
@@ -69,16 +76,22 @@ export class NotePage implements OnInit {
     imagePreviewModal.present();
   }
 
+  onClickImageContainer(event) {
+    if (!(event instanceof CustomEvent)) {
+      if (this.imageFiles.length > 0) {
+        this.openImagePreview();
+      } else {
+        this.openFileExplorer();
+      }
+    }
+  }
+
   deleteNote() {
     this.loaderService.showLoader();
     this.http
       .delete(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
       .pipe(finalize(() => this.loaderService.hideLoader()))
       .subscribe(() => this.router.navigate(['/home']));
-  }
-
-  handleSuccess(event) {
-    console.log('iMAGE UPLOADED SCCESSFULLY', event);
   }
 
   convertToBase64(file): Promise<string> {
@@ -120,7 +133,7 @@ export class NotePage implements OnInit {
     }
   }
 
-  async openFileExplorer(event) {
+  async openFileExplorer() {
     if (this.mode === 'EDIT') {
       this.imageInput.nativeElement.click();
     }
@@ -136,5 +149,9 @@ export class NotePage implements OnInit {
         base64,
       });
     }
+  }
+
+  ngAfterViewInit(): void {
+    register();
   }
 }
