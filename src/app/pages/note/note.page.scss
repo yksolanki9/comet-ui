@@ -1,8 +1,14 @@
 .note {
   &__header {
-    &__icon {
+    &__delete-icon {
       font-size: 24px;
-      padding: 8px 14px;
+      padding: 8px 14px 8px 4px;
+    }
+
+    &__image-icon {
+      font-size: 26px;
+      padding: 8px 4px;
+      margin-top: 2px;
     }
   }
 

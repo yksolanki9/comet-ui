@@ -3,13 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-icon
-      *ngIf="mode !== 'ADD'"
-      (click)="deleteNote()"
-      slot="end"
-      class="note__header__icon"
-      name="trash-outline"
-    ></ion-icon>
+    <ion-buttons slot="end">
+      <ion-icon
+        (click)="openFileExplorer($event)"
+        class="note__header__image-icon"
+        name="image-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="mode !== 'ADD'"
+        (click)="deleteNote()"
+        class="note__header__delete-icon"
+        name="trash-outline"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

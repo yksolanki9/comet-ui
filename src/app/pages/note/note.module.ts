@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,5 +19,6 @@ import { ImagePreviewModalComponent } from './image-preview-modal/image-preview-
     ReactiveFormsModule,
   ],
   declarations: [NotePage, DateInputComponent, ImagePreviewModalComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NotePageModule {}
