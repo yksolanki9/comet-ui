@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastController } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { finalize } from 'rxjs/operators';
+import { ReminderService } from 'src/app/core/services/reminder.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastController: ToastController,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private reminderService: ReminderService
   ) {}
 
   ngOnInit() {
@@ -60,7 +62,12 @@ export class LoginPage implements OnInit {
       .login(data)
       .pipe(finalize(() => this.loaderService.hideLoader()))
       .subscribe({
-        next: () => this.router.navigate(['/home']),
+        next: () => {
+          this.reminderService.setDailyReminder(() => {
+            this.router.navigate(['/', 'note', { mode: 'add' }]);
+          });
+          this.router.navigate(['/home']);
+        },
         error: (err) => this.showErrorMessage(err?.error?.message),
       });
   }
