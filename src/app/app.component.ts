@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    this.scheduleNotifications();
+  }
+
+  private async scheduleNotifications() {
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          id: 1,
+          title: 'Testing notifications',
+          body: 'Please write about your day',
+        },
+      ],
+    });
+  }
 }
