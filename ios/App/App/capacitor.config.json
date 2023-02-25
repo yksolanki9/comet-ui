@@ -1,6 +1,6 @@
 {
-  "appId": "com.ionic.comet_daily_journal",
-  "appName": "comet",
-  "webDir": "www",
-  "bundledWebRuntime": false
+	"appId": "com.ionic.comet_daily_journal",
+	"appName": "comet",
+	"webDir": "www",
+	"bundledWebRuntime": false
 }
