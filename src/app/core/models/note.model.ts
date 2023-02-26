@@ -6,6 +6,7 @@ export interface Note {
   title: string;
   content: string;
   images: Image[];
+  userId: string;
 }
 
 interface Image {
