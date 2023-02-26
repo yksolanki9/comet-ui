@@ -2,21 +2,21 @@
   <ion-toolbar>
     <ion-title class="home__header__title">My diary</ion-title>
     <!-- TODO: Provide option to logout on clicking this button -->
-    <ion-icon
+    <!-- <ion-icon
       class="home__header__icon"
       slot="end"
       name="ellipsis-vertical"
       id="click-trigger"
-    ></ion-icon>
+    ></ion-icon> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-popover #optionsPopover trigger="click-trigger" triggerAction="click">
+  <!-- <ion-popover #optionsPopover trigger="click-trigger" triggerAction="click">
     <ng-template>
       <ion-content class="ion-padding" (click)="logout()"> Log Out</ion-content>
     </ng-template>
-  </ion-popover>
+  </ion-popover> -->
 
   <div [ngClass]="{'h-max': notes?.length === 0}" class="home__content">
     <ng-container *ngIf="!isLoading; else loader">
