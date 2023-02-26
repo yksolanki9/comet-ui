@@ -32,8 +32,8 @@ export class HomePage implements OnInit {
       });
   }
 
-  openNote(noteId: string) {
-    this.router.navigate(['/', 'note', { id: noteId }]);
+  openNote(note: Note) {
+    this.router.navigate(['/', 'note', { note: JSON.stringify(note) }]);
   }
 
   createNote() {
