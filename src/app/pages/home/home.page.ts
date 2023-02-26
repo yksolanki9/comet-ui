@@ -25,12 +25,9 @@ export class HomePage implements OnInit {
   ionViewWillEnter() {
     this.isLoading = true;
     this.http
-      .get<{
-        notes: Note[];
-        userId: string;
-      }>(`${environment.ROOT_URL}/api/v1/notes`)
-      .subscribe((userNotes) => {
-        this.notes = userNotes?.notes || [];
+      .get<Note[]>(`${environment.ROOT_URL}/api/v1/notes`)
+      .subscribe((notes) => {
+        this.notes = notes || [];
         this.isLoading = false;
       });
   }
