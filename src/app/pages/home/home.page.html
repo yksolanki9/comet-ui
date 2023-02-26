@@ -24,7 +24,7 @@
         <ng-container *ngFor="let note of notes">
           <app-note-card
             [note]="note"
-            (openNote)="openNote(note._id)"
+            (openNote)="openNote(note)"
           ></app-note-card>
         </ng-container>
       </ng-container>
