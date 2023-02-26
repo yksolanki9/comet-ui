@@ -25,7 +25,7 @@ export class NotePage implements OnInit, AfterViewInit {
   @ViewChild('imageInput') imageInput: ElementRef;
   noteForm: FormGroup;
   mode: 'ADD' | 'EDIT' | 'VIEW' = 'VIEW';
-  noteId: string;
+  note: Note;
   isLoading = true;
   uploadInProgress = false;
   imageFiles = [];
@@ -54,7 +54,7 @@ export class NotePage implements OnInit, AfterViewInit {
       this.uploadInProgress = true;
 
       this.http
-        .patch(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`, {
+        .patch(`${environment.ROOT_URL}/api/v1/note/${this.note._id}`, {
           ...this.noteForm.value,
           images: this.imageFiles,
         })
@@ -89,7 +89,7 @@ export class NotePage implements OnInit, AfterViewInit {
   deleteNote() {
     this.loaderService.showLoader();
     this.http
-      .delete(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
+      .delete(`${environment.ROOT_URL}/api/v1/note/${this.note._id}`)
       .pipe(finalize(() => this.loaderService.hideLoader()))
       .subscribe(() => this.router.navigate(['/home']));
   }
@@ -105,7 +105,7 @@ export class NotePage implements OnInit, AfterViewInit {
 
   ionViewWillEnter() {
     this.imageFiles = [];
-    this.noteId = this.activatedRoute.snapshot.params.id;
+    const note = this.activatedRoute.snapshot.params.note;
 
     if (this.activatedRoute.snapshot.params.mode === 'add') {
       this.mode = 'ADD';
@@ -118,18 +118,15 @@ export class NotePage implements OnInit, AfterViewInit {
       content: new FormControl(),
     });
 
-    if (this.noteId) {
-      this.http
-        .get<Note>(`${environment.ROOT_URL}/api/v1/note/${this.noteId}`)
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe((note) => {
-          this.noteForm.patchValue({
-            dateOfEntry: note.dateOfEntry,
-            title: note.title,
-            content: note.content,
-          });
-          this.imageFiles = note.images;
-        });
+    if (note) {
+      this.note = JSON.parse(note);
+      this.isLoading = false;
+      this.noteForm.patchValue({
+        dateOfEntry: this.note.dateOfEntry,
+        title: this.note.title,
+        content: this.note.content,
+      });
+      this.imageFiles = this.note.images;
     }
   }
 
