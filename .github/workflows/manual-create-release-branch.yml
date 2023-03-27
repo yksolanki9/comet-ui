@@ -20,13 +20,13 @@ jobs:
             echo "branch_exists=false" >> $GITHUB_ENV
           fi
       - name: Create release branch
-        if: env.branch_exists === 'false'
+        if: ${{env.branch_exists === 'false'}}
         run: |
           git checkout -b $RELEASE_BRANCH
           git push origin $RELEASE_BRANCH
           echo "message=Branch $RELEASE_BRANCH created successfully." >> $GITHUB_ENV
       - name: Branch already exists
-        if: env.branch_exists === 'true'
+        if: ${{env.branch_exists === 'true'}}
         run: echo "message=Branch $RELEASE_BRANCH already exists." >> $GITHUB_ENV
       - name: Send message on Slack
         uses: archive/github-actions-slack@v2.0.1
