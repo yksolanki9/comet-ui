@@ -1,0 +1,19 @@
+name: Create Release Branch
+on:
+  schedule:
+  # Run every Friday at 5:00 PM IST
+    - cron: '5 * * * *'
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Create Release Branch
+        run: |
+          git checkout -b release_$(date +%Y_%m_%d)
+          git push origin release_$(date +%Y_%m_%d)
+
+
