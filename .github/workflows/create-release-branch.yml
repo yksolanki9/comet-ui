@@ -1,8 +1,8 @@
 name: Create Release Branch
 on:
   schedule:
-  # Run every Friday at 5:00 PM IST
-    - cron: '5 * * * *'
+  # Run every 5 minutes
+    - cron: '0/5 0-23 * * *'
 jobs:
   create-release-branch:
     runs-on: ubuntu-latest
