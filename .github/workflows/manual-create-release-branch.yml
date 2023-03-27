@@ -16,6 +16,7 @@ jobs:
         run: |
           if git ls-remote --heads origin $RELEASE_BRANCH; then
             exit -1
+          fi
       - name: Create Release Branch
         run: |
           git checkout -b $RELEASE_BRANCH
