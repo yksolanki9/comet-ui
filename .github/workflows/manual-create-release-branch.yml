@@ -13,7 +13,7 @@ jobs:
         run: echo "release_branch=mobile_release_$(date +%Y_%m_%d)" >> $GITHUB_ENV
       - name: Check if release branch exists
         run: |
-          if git ls-remote --heads origin ${{env.release_branch}}; then
+          if git ls-remote --exit-code --heads origin ${{env.release_branch}}; then
             echo "branch_exists=true" >> $GITHUB_ENV
           else
             echo "branch_exists=false" >> $GITHUB_ENV
