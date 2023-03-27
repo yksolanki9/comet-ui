@@ -9,7 +9,7 @@ jobs:
         run: echo "release_branch=mobile_release_$(date +%Y_%m_%d)" >> $GITHUB_ENV
       - name: Check if release branch exists
         run: |
-          if git ls-remote --heads origin $RELEASE_BRANCH; then
+          if git ls-remote --heads origin ${{env.release_branch}}; then
             echo "branch_exists=true" >> $GITHUB_ENV
           else
             echo "branch_exists=false" >> $GITHUB_ENV
@@ -17,19 +17,19 @@ jobs:
       - name: Create release branch
         if: ${{env.branch_exists == 'false'}}
         run: |
-          git checkout -b $env.release_branch
-          git push origin $env.release_branch
-          echo "message=Branch $env.release_branch created successfully." >> $GITHUB_ENV
+          git checkout -b ${{env.release_branch}}
+          git push origin ${{env.release_branch}}
+          echo "message=Branch ${{env.release_branch}} created successfully." >> $GITHUB_ENV
       - name: Branch already exists
         if: ${{env.branch_exists == 'true'}}
-        run: echo "message=Branch $env.release_branch already exists." >> $GITHUB_ENV
+        run: echo "message=Branch ${{env.release_branch}} already exists." >> $GITHUB_ENV
       - name: Echo message
         run: |
-          echo "$message \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...$env.release_branch"
+          echo "$message \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...${{env.release_branch}}"
       # - name: Send message on Slack
       #   uses: archive/github-actions-slack@v2.0.1
       #   id: notify
       #   with:
       #     slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
       #     slack-channel: C029QPGHSQL
-      #     slack-text: "$message \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...$env.release_branch"
+      #     slack-text: "$message \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...${{env.release_branch}}"
