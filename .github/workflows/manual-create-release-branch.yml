@@ -5,6 +5,10 @@ jobs:
   create-release-branch:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
       - name: Get Release Branch Name
         run: echo "release_branch=mobile_release_$(date +%Y_%m_%d)" >> $GITHUB_ENV
       - name: Check if release branch exists
