@@ -29,7 +29,7 @@ jobs:
         run: echo "message=Branch ${{env.release_branch}} already exists." >> $GITHUB_ENV
       - name: Echo message
         run: |
-          echo "$message \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...${{env.release_branch}}"
+          echo "${{message}} \n Check diff here: https://github.com/fylein/fyle-mobile-app/compare/master...${{env.release_branch}}"
       # - name: Send message on Slack
       #   uses: archive/github-actions-slack@v2.0.1
       #   id: notify
